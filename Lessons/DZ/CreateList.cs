@@ -10,32 +10,41 @@ namespace Lessons.DZ
   {
     public static void MakeList()
     {
-      List<List<int>> arrayList = new List<List<int>>(); // динамический двумерный массив
-      int m; // количество колонок введенных пользователем
+      // задаём динамический двумерный массив
+      List<List<int>> arrayList = new List<List<int>>();
+      
+      // устанавливаем количество колонок введенных пользователем
       Console.Write("Введите количество колонок списка: ");
-      m = int.Parse(Console.ReadLine());
+      var m = int.Parse(Console.ReadLine());
 
-      var r = new Random(); //Random для числа строк
-      int n = r.Next(10, 10000);
+      // при помощи Random задаем число строк
+      var r = new Random();
+      var n = r.Next(10, 50);
 
+      // генерируем двумерный список с данными
       arrayList=GenerateArrayList(m, n, arrayList);
+
 
       Console.WriteLine("нажмите любую клавишу для вывода списка в консоль...");
       Console.ReadKey();
-      PrintArrayList(m,n,arrayList);
-
       
+      // выводим список в консоль
+      PrintArrayList(m,n,arrayList);
 
       Console.WriteLine("Нажмити любую клавишу для сортировки списка");
       Console.ReadKey();
-      SortArrayList(arrayList);
+
+      // производим сортировку списка и вносим его в новый, сортированный, двумерный список
+      List <List<int>> sortedArray;
+      sortedArray=SortArrayList(arrayList, m);
+      PrintArrayList(m, sortedArray.Count, sortedArray);
 
       Console.ReadKey();
     }
 
     private static void PrintArrayList(int m, int n, List<List<int>> arrayList)
     {
-      for (int i = 0; i < n; i++)                     //вывод массива
+      for (int i = 0; i < n; i++) //вывод массива
       {
         for (int j = 0; j < m; j++)
           Console.Write(arrayList[i][j].ToString() + " | ");
@@ -43,16 +52,29 @@ namespace Lessons.DZ
       }
     }
 
-    private static List<List<int>> SortArrayList(List<List<int>> arrayList)
+    private static List<List<int>> SortArrayList(List<List<int>> arrayList, int m)
     {
-      
-      Console.WriteLine("Метод на стадии реализации...");
-      return arrayList;
+      List<int> sortedRow;
+
+      var sortedArray = new List<List<int>>();
+
+      for (int i = 0; i < arrayList.Count; i++)
+      {
+        sortedRow = new List<int>();
+        for (int j = 0;j < m; j++)
+        {
+          sortedRow.Add(arrayList[i][j]);
+          sortedRow.Sort();
+        }
+        sortedArray.Add(sortedRow);
+      }
+
+      return sortedArray;
     }
 
     private static List<List<int>> GenerateArrayList(int m, int n, List<List<int>> arrayList)
     {
-      List<int> row = new List<int>(); // строка массива
+      List<int> row; ; // строка массива
 
       var num = new Random();
 
