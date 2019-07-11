@@ -11,6 +11,7 @@ namespace Lessons
   {
     static void Main(string[] args)
     {
+      Console.OutputEncoding = Encoding.Unicode;
       CreateList.MakeList();
     }
   }

@@ -10,6 +10,7 @@ namespace Lessons.DZ
   {
     public static void MakeList()
     {
+      
       // задаём динамический двумерный массив
       List<List<int>> arrayList = new List<List<int>>();
       
@@ -31,15 +32,53 @@ namespace Lessons.DZ
       // выводим список в консоль
       PrintArrayList(m,n,arrayList);
 
-      Console.WriteLine("Нажмити любую клавишу для сортировки списка");
+      Console.WriteLine("Нажмити любую клавишу для сортировки строк списка");
       Console.ReadKey();
 
       // производим сортировку списка и вносим его в новый, сортированный, двумерный список
       List <List<int>> sortedArray;
       sortedArray=SortArrayList(arrayList, m);
+      // выводим на консоль список с сортированными строками
       PrintArrayList(m, sortedArray.Count, sortedArray);
 
+      Console.WriteLine("Нажмити любую клавишу для сортировки списка по колонкам");
       Console.ReadKey();
+      // производим сортировку списка sortedArray по колонкам и заносим его в новый список
+      List<List<int>> sortedArrayByColumns;
+      sortedArrayByColumns = SortArrayListByColumns(sortedArray, m);
+      // выводим на консоль список с сортированными строками
+      PrintArrayList(m, sortedArrayByColumns.Count, sortedArray);
+
+      Console.ReadKey();
+    }
+
+    private static List<List<int>> SortArrayListByColumns(List<List<int>> sortedArray, int m)
+    {
+      var sortedArrayByColumns= new List<List<int>>();
+
+      //for (int row = 0; row < sortedArray.Count; row++)
+      //{
+      //  for (int column = 0; column < m; column++)
+      //  {
+
+      //  }
+      //}
+
+      List<int> sortedRow;
+
+      for (int row = 0; row < sortedArray.Count; row++)
+      {
+        sortedRow = new List<int>();
+        for (int column = 0; column < m; column++)
+        {
+          sortedRow.Add(sortedArray[row][column]);
+          sortedRow.Sort();
+        }
+      }
+
+     
+
+      return sortedArrayByColumns;
     }
 
     private static void PrintArrayList(int m, int n, List<List<int>> arrayList)
