@@ -45,53 +45,44 @@ namespace Lessons.DZ
       Console.ReadKey();
       // производим сортировку списка sortedArray по колонкам и заносим его в новый список
       List<List<int>> sortedArrayByColumns;
-      sortedArrayByColumns = SortArrayListByColumns(sortedArray, m);
+      sortedArrayByColumns = SortArrayListBySumOfRows(sortedArray, m);
       // выводим на консоль список с сортированными строками
+      Console.WriteLine("Вывод по сумме");
       PrintArrayList(m, sortedArrayByColumns.Count, sortedArray);
 
       Console.ReadKey();
     }
 
-    private static List<List<int>> SortArrayListByColumns(List<List<int>> sortedArray, int m)
+    private static List<List<int>> SortArrayListBySumOfRows(List<List<int>> sortedArray, int m)
     {
-      var sortedArrayByColumns= new List<List<int>>();
 
-      //for (int row = 0; row < sortedArray.Count; row++)
-      //{
-      //  for (int column = 0; column < m; column++)
-      //  {
-
-      //  }
-      //}
-
-      List<int> sortedRow;
-
-      for (int row = 0; row < sortedArray.Count; row++)
-      {
-        sortedRow = new List<int>();
-        for (int column = 0; column < m; column++)
+      sortedArray.Sort((List<int> x, List<int> y) =>
         {
-          sortedRow.Add(sortedArray[row][column]);
-          sortedRow.Sort();
+          if (x.Sum() == y.Sum()) return 0;
+          if (x.Sum() > y.Sum()) return 1;
+          return -1;
         }
-      }
-
-     
-
-      return sortedArrayByColumns;
+      );
+      PrintArrayList(m, sortedArray.Count, sortedArray);
+      return sortedArray;
     }
 
-    private static void PrintArrayList(int m, int n, List<List<int>> arrayList)
+
+
+    public static void PrintArrayList(int m, int n, List<List<int>> arrayList)
     {
       for (int i = 0; i < n; i++) //вывод массива
       {
         for (int j = 0; j < m; j++)
-          Console.Write(arrayList[i][j].ToString() + " | ");
-        Console.WriteLine();
+        {
+          Console.Write(arrayList[i][j] + " | ");
+        }
+        Console.WriteLine(" => {0}", arrayList[i].Sum());
       }
+    
     }
 
-    private static List<List<int>> SortArrayList(List<List<int>> arrayList, int m)
+    public static List<List<int>> SortArrayList(List<List<int>> arrayList, int m)
     {
       List<int> sortedRow;
 

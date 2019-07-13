@@ -7,12 +7,18 @@ using Lessons.DZ;
 
 namespace Lessons
 {
+
+
   class Program
   {
     static void Main(string[] args)
     {
       Console.OutputEncoding = Encoding.Unicode;
-      CreateList.MakeList();
+      //CreateList.MakeList();
+      Tryouts.Test();
+
+      //Console.ReadKey();
     }
+
   }
 }
