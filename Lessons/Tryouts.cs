@@ -11,32 +11,31 @@ namespace Lessons
     {
       var arrayList = new List<List<int>>();
 
-      // add rows to a list of rows
-      List<int> row = new List<int>() {1, 6, 3, 156, 10};
-      arrayList.Add(row.ToList());
-      row = new List<int>() {12, 8, 1, 2, 30};
-      arrayList.Add(row.ToList());
-      row = new List<int>() {5, 4, 8, 12, 25};
-      arrayList.Add(row.ToList());
-      row = new List<int>() {3, 2, 3, 16, 9};
-      arrayList.Add(row.ToList());
+      List<List<int>> list = new List<List<int>>
+      {
+        new List<int> { 5, 9, 17, 40, 99 },
+        new List<int> { 12, 24, 30, 45, 80 },
+        new List<int>() { 5, 9, 17, 16, 99 },
+        new List<int>() { 0, 9, 17, 16, 0 },
+        new List<int>() { 129, 5, 8, 15, 25 } };
 
       // display list in console
-      CreateList.PrintArrayList(row.Count, arrayList.Count, arrayList);
+      List<List<int>> sortedList = new List<List<int>>();
+      IEnumerable<List<int>> rlist = list.Select(
+      lst => lst.OrderBy(i => i).ToList());
 
 
-      // sort rows ascending
-      var sortedRowsList = CreateList.SortArrayList(arrayList, row.Count);
-      Console.WriteLine();
-      Console.WriteLine("Sorted IList...");
-      CreateList.PrintArrayList(row.Count, sortedRowsList.Count, sortedRowsList);
+      sortedList = rlist.OrderBy(lst => lst[0]).ThenBy(lst => lst[1]).ThenBy(lst => lst[2]).ToList();
 
-      //var newList = people.OrderBy(x=>x.LastName).ToList(); // ToList optional
+      int lastColumn = 4;
 
-      var sortedByRowsAndColumns = new List<List<int>>();
+      //sortedList = rlist.OrderBy(lst => lst[0]).ThenBy(lst => lst.).ToList();
+      //sequence.OrderBy(x => x.A).ThenBy(x => x.B)
 
-      sortedByRowsAndColumns = sortByRowsAndColumns(sortedRowsList, row.Count, sortedRowsList.Count);
 
+
+
+      CreateList.PrintArrayList(5, sortedList.Count, sortedList);
 
 
 
